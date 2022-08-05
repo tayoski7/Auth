@@ -24,7 +24,7 @@ const Home = () => {
       </div>
     </HomeContainer>
   )
-}
+};
 
 export default Home
 

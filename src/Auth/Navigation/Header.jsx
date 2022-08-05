@@ -58,7 +58,7 @@ const ContainerWrapper = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 
 `
 const Logo = styled.div`
@@ -70,6 +70,7 @@ const Logo1 = styled.div`
 `
 const LogoWrap = styled.div`
    display: flex;
+   margin-left:10px;
 `
 const MobileIcon = styled.div`
   font-size: 25px;
@@ -90,9 +91,10 @@ const Navs = styled.ul`
   font-weight: bold;
 @media screen and (max-width: 768px){
   flex-direction: column;
+  justify-content:space-around;
   position: absolute;
-  background-color: white;
-  opacity: 0.8;
+  background-color: whitesmoke;
+  // opacity: 0.9;
   height:100%;
   width: 100%;
   top:63px;

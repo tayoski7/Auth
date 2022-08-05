@@ -1,11 +1,18 @@
 import React,{useState,} from 'react'
 import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const SignUp = () => {
-
+  const linkstyle ={
+    color:'red',
+    textDecoration:'none',
+    fontWeight:'bolder',
+    fontSize:'1em',
+  };
+  const showPassword = '&';
+  const hidePassword = 'O';
   const navigate = useNavigate();
-
   const initialValue = [{
     firstName:'',
     lastName:'',
@@ -20,6 +27,7 @@ const SignUp = () => {
   }];
 
   const [userData,setUserData] = useState(initialValue);
+  const [show,setShow] = useState(false);
 
   const handleChange =(e)=>{
     const {name,value,type,checked} = e.target;
@@ -82,18 +90,33 @@ const SignUp = () => {
 
         <div className='rowDiv'>
           <input 
-            className="inputBox" type={"password"}
+            className="inputBox" type={show?"text":"password"}
             name={"password"} value={userData.password} 
             placeholder={"Enter Your Password"} 
             onChange={handleChange} required
           /><br/>
+          <button 
+            className='showPassword'
+            type={'button'}
+            onClick={()=>setShow((prev)=>!prev)}
+          >
+            {show? showPassword:hidePassword}
+          </button>
 
           <input 
             className="inputBox" value={userData.confirmPassword}
-            name="confirmPassword" type="password" 
-            placeholder="Confirm Your Password" 
+            name={"confirmPassword"} 
+            type={show?"text":"password"}
+            placeholder={"Confirm Your Password"}
             onChange={handleChange} required
           /><br/>
+          <button 
+            className='showPassword'
+            type={'button'}
+            onClick={()=>setShow((prev)=>!prev)}
+          >
+           {show?showPassword:hidePassword}
+          </button>
         </div>
 
         <div className='rowDiv'>
@@ -107,7 +130,7 @@ const SignUp = () => {
           <input 
             className="inputBox" type="text" 
             name="school" 
-            placeholder="enter your school" 
+            placeholder="Enter Your School Name" 
             onChange={handleChange} required
           /><br/>
         </div>
@@ -139,6 +162,12 @@ const SignUp = () => {
         >
           Sign Up
         </button>
+        <p className='signUpSignIn'>Already have an account ? 
+           <Link to="/signin" style={linkstyle}
+          >
+            &nbsp;Sign In
+          </Link>
+        </p>
 
       </form>
 
@@ -160,16 +189,12 @@ export const SignUpContainer=styled.div`
   .signInForm{
       width:100%;
       height:70vh;
-      // background-color:rgb(0,128,0);
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       border-radius: 30px;
       background-color:#16195E; 
-      // #007e00;
-      // box-shadow:  10px 10px 52px #003200,
-      //             -10px -10px 52px #00ca00;
   }
   .termsOfService{
       display:flex; 
@@ -189,8 +214,7 @@ export const SignUpContainer=styled.div`
           color:#16195E;
           font-weight:bolder;
           padding-left:10px;
-      }
-     
+      } 
     }
   }
   .submitButton{
@@ -223,26 +247,47 @@ export const SignUpContainer=styled.div`
     height:40px;
     margin-bottom:10px;
   }
+  .signUpSignIn{
+    color:whitesmoke;
+    margin-top:5px;
+    margin-bottom:10px;
+  }
+  .showPassword{
+    height:30px;
+    border:none;
+    color:#16195E;
+    border-radius:3px;
+    background-color:lightgrey;
+    position:relative;
+    left:-40px;
+  }
   @media screen and (max-width:1025px){
     .inputBox{
       height:25px;
+    }
+    .showPassword{
+      height:20px;
     }
   }
   @media screen and (max-width:426px){
     .inputBox{
       width:45%;
+      font-size:11px;
     }
   }
   @media screen and (max-width:376px){
     .inputBox{
       font-weight:medium;
-      font-size:11px;
+      font-size:9px;
     }
   }
   @media screen and (max-width:321px){
     .inputBox{
       font-weight:medium;
-      font-size:9px;
+      font-size:6px;
+    }
+    .showPassword{
+      height:15px;
     }
   }
 `
